@@ -6,7 +6,8 @@ const server = http.createServer((req, res) => {
     const videoPath = path.join(__dirname, 'video.mp4');
     const stat = fs.statSync(videoPath);
 
-    const range = req.headers.range;
+    const range = req.headers.range ?? '1';
+
     if (!range) {
         res.statusCode = 416;
         res.end('Requires Range header');
